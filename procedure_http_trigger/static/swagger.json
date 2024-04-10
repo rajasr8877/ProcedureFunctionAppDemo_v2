@@ -1,0 +1,427 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Procedure Access API",
+        "version": "1.0.0"
+    },
+    "tags": [
+        {
+            "name": "Procedure",
+            "description": "CRUD Operations"
+        }
+    ],
+    "paths": {
+        "/home": {
+            "get": {
+                "description": "Returns message showing app is up",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            }
+        },
+        "/procedure": {
+            "get": {
+                "tags": [
+                    "Procedure"
+                ],
+                "summary": "Get All Procedure",
+                "description": "Returns all available procedures",
+                "produces": [
+                    "application/json"
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "Procedure"
+                ],
+                "summary": "Create a Procedure",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "laser_system_serial_number": {
+                                        "type": "string",
+                                        "example": "22314565646456910"
+                                    },
+                                    "case_number": {
+                                        "type": "string",
+                                        "example": "DBC154"
+                                    },
+                                    "procedure_date": {
+                                        "type": "string",
+                                        "example": "2023-03-22T14:30:00"
+                                    },
+                                    "ecm_logs": {
+                                        "type": "string",
+                                        "example": "path/to/ecm_logs.txt"
+                                    },
+                                    "surgical_videos": {
+                                        "type": "string",
+                                        "example": "path/to/surgical_videos.mp4"
+                                    },
+                                    "endoscopic_used": {
+                                        "type": "string",
+                                        "example": "Yes"
+                                    },
+                                    "laser_source_information": {
+                                        "type": "string",
+                                        "example": "path/to/laser_source_info.txt"
+                                    },
+                                    "light_source_lamp_age": {
+                                        "type": "string",
+                                        "example": "6 months"
+                                    },
+                                    "imaging_mode": {
+                                        "type": "string",
+                                        "example": "HD"
+                                    },
+                                    "treatment_location": {
+                                        "type": "string",
+                                        "example": "Right Kidney"
+                                    },
+                                    "treatment_type": {
+                                        "type": "string",
+                                        "example": "Lithotripsy"
+                                    },
+                                    "fiber_used": {
+                                        "type": "string",
+                                        "example": "200 micron fiber"
+                                    },
+                                    "number_of_stones_treated": {
+                                        "type": "integer",
+                                        "example": 3
+                                    },
+                                    "stone_burden": {
+                                        "type": "string",
+                                        "example": "1.5 cm"
+                                    }
+                                },
+                                "required": ["laser_system_serial_number","case_number","procedure_date","ecm_logs"] 
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Created successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Procedure"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/procedure/{id}": {
+            "get": {
+                "tags": [
+                    "Procedure"
+                ],
+                "summary": "Get a Single Procedure",
+                "description": "Return procedure based on given id",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "description": "ID of the procedure to be returned"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Procedure"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "Procedure"
+                ],
+                "summary": "Update a Procedure",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "description": "ID of the procedure to be updated"
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "laser_system_serial_number": {
+                                        "type": "string",
+                                        "example": "22314565646456910"
+                                    },
+                                    "case_number": {
+                                        "type": "string",
+                                        "example": "DBC154"
+                                    },
+                                    "procedure_date": {
+                                        "type": "string",
+                                        "example": "2023-03-22T14:30:00"
+                                    },
+                                    "ecm_logs": {
+                                        "type": "string",
+                                        "example": "path/to/ecm_logs.txt"
+                                    },
+                                    "surgical_videos": {
+                                        "type": "string",
+                                        "example": "path/to/surgical_videos.mp4"
+                                    },
+                                    "endoscopic_used": {
+                                        "type": "string",
+                                        "example": "Yes"
+                                    },
+                                    "laser_source_information": {
+                                        "type": "string",
+                                        "example": "path/to/laser_source_info.txt"
+                                    },
+                                    "light_source_lamp_age": {
+                                        "type": "string",
+                                        "example": "6 months"
+                                    },
+                                    "imaging_mode": {
+                                        "type": "string",
+                                        "example": "HD"
+                                    },
+                                    "treatment_location": {
+                                        "type": "string",
+                                        "example": "Right Kidney"
+                                    },
+                                    "treatment_type": {
+                                        "type": "string",
+                                        "example": "Lithotripsy"
+                                    },
+                                    "fiber_used": {
+                                        "type": "string",
+                                        "example": "200 micron fiber"
+                                    },
+                                    "number_of_stones_treated": {
+                                        "type": "integer",
+                                        "example": 3
+                                    },
+                                    "stone_burden": {
+                                        "type": "string",
+                                        "example": "1.5 cm"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Updated successfully",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Procedure"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "Procedure"
+                ],
+                "summary": "Delete Single Procedure",
+                "description": "Delete procedure based on given id",
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "integer",
+                            "format": "int32"
+                        },
+                        "description": "ID of the procedure to be returned"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful operation"
+                    },
+                    "404": {
+                        "description": "Not found"
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "Procedure": {
+            "type": "object",
+            "properties": {
+                "laser_system_serial_number": {
+                    "type": "string",
+                    "example": "22314565646456910"
+                },
+                "case_number": {
+                    "type": "string",
+                    "example": "DBC154"
+                },
+                "procedure_date": {
+                    "type": "string",
+                    "example": "2023-03-22T14:30:00"
+                },
+                "ecm_logs": {
+                    "type": "string",
+                    "example": "path/to/ecm_logs.txt"
+                },
+                "surgical_videos": {
+                    "type": "string",
+                    "example": "path/to/surgical_videos.mp4"
+                },
+                "endoscopic_used": {
+                    "type": "string",
+                    "example": "Yes"
+                },
+                "laser_source_information": {
+                    "type": "string",
+                    "example": "path/to/laser_source_info.txt"
+                },
+                "light_source_lamp_age": {
+                    "type": "string",
+                    "example": "6 months"
+                },
+                "imaging_mode": {
+                    "type": "string",
+                    "example": "HD"
+                },
+                "treatment_location": {
+                    "type": "string",
+                    "example": "Right Kidney"
+                },
+                "treatment_type": {
+                    "type": "string",
+                    "example": "Lithotripsy"
+                },
+                "fiber_used": {
+                    "type": "string",
+                    "example": "200 micron fiber"
+                },
+                "number_of_stones_treated": {
+                    "type": "integer",
+                    "example": 3
+                },
+                "stone_burden": {
+                    "type": "string",
+                    "example": "1.5 cm"
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Procedure": {
+                "type": "object",
+                "properties": {
+                    "laser_system_serial_number": {
+                        "type": "string",
+                        "example": "22314565646456910"
+                    },
+                    "case_number": {
+                        "type": "string",
+                        "example": "DBC154"
+                    },
+                    "procedure_date": {
+                        "type": "string",
+                        "example": "2023-03-22T14:30:00"
+                    },
+                    "ecm_logs": {
+                        "type": "string",
+                        "example": "path/to/ecm_logs.txt"
+                    },
+                    "surgical_videos": {
+                        "type": "string",
+                        "example": "path/to/surgical_videos.mp4"
+                    },
+                    "endoscopic_used": {
+                        "type": "string",
+                        "example": "Yes"
+                    },
+                    "laser_source_information": {
+                        "type": "string",
+                        "example": "path/to/laser_source_info.txt"
+                    },
+                    "light_source_lamp_age": {
+                        "type": "string",
+                        "example": "6 months"
+                    },
+                    "imaging_mode": {
+                        "type": "string",
+                        "example": "HD"
+                    },
+                    "treatment_location": {
+                        "type": "string",
+                        "example": "Right Kidney"
+                    },
+                    "treatment_type": {
+                        "type": "string",
+                        "example": "Lithotripsy"
+                    },
+                    "fiber_used": {
+                        "type": "string",
+                        "example": "200 micron fiber"
+                    },
+                    "number_of_stones_treated": {
+                        "type": "integer",
+                        "example": 3
+                    },
+                    "stone_burden": {
+                        "type": "string",
+                        "example": "1.5 cm"
+                    }
+                }
+            }
+        }
+    }
+}
